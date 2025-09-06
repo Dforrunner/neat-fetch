@@ -1,0 +1,65 @@
+{
+  "name": "neat-fetch",
+  "version": "1.0.0",
+  "description": "Neat Fetch is a modern, lightweight, and type-safe wrapper around the native `fetch` API that makes HTTP requests predictable, readable, and enjoyable.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts --minify",
+    "dev": "tsup index.ts --format cjs,esm --dts --watch",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "fetch",
+    "http",
+    "request",
+    "typescript",
+    "error-handling",
+    "safe",
+    "api",
+    "type-safe",
+    "error-handling",
+    "tuple",
+    "retry",
+    "timeout",
+    "nodejs",
+    "browser",
+    "react-native",
+    "rest",
+    "json",
+    "axios-alternative",
+    "http-request",
+    "javascript",
+    "neat-fetch",
+    "promise",
+    "try-catch"
+  ],
+  "author": "dforrunner",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dforrunner/neat-fetch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dforrunner/neat-fetch/issues"
+  },
+  "homepage": "https://github.com/Dforrunner/neat-fetch#readme"
+}
