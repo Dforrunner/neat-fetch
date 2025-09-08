@@ -8,7 +8,7 @@ First off, thank you for considering contributing! ❤️ Your help makes **Neat
 
 If you find a bug or have a feature request:
 
-1. Check the [issues](https://github.com/yourusername/neat-fetch/issues) to see if it has already been reported.
+1. Check the [issues](https://github.com/Dforrunner/neat-fetch/issues) to see if it has already been reported.
 2. If not, open a new issue with a clear title and description.
 3. Include steps to reproduce, expected behavior, and environment details (Node.js version, browser, etc.).
 
