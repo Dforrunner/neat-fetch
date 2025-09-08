@@ -1,6 +1,13 @@
 # 🚀 Neat Fetch
 
 
+![Status](https://img.shields.io/badge/Status-Active-green)
+[![npm version](https://img.shields.io/npm/v/neat-fetch)](https://www.npmjs.com/package/neat-fetch)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+[![license](https://img.shields.io/npm/l/neat-fetch)](https://github.com/Dforrunner/neat-fetch/blob/main/LICENSE)
+![bundle size](https://img.shields.io/bundlephobia/min/neat-fetch)
+![node](https://img.shields.io/node/v/neat-fetch)
+
 **Neat Fetch is a modern, lightweight, and type-safe wrapper around the native `fetch` API that makes HTTP requests predictable, readable, and enjoyable.**
 
 Tired of nesting `try/catch` blocks, juggling `undefined` responses, or writing verbose error handling logic? Neat Fetch brings the simplicity and clarity of Go-style error handling to JavaScript and TypeScript.**
