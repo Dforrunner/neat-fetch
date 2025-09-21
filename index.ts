@@ -106,7 +106,12 @@ class NeatFetch implements NeatFetchInstance {
   private readonly fetchFn: typeof fetch;
 
   constructor(url: string, options: FetchOptions = {}) {
-    this.fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
+    this.fetchFn =
+      options.fetchFn ??
+      (((url: string, init?: RequestInit) => {
+        return globalThis.fetch(url, init);
+      }) as any);
+
     this.url = url;
     this.fetchOptions = { ...options };
     this.headersObj = normalizeHeaders(this.fetchOptions.headers);
@@ -557,10 +562,6 @@ function createNeatFetchInstance(
     return new NeatFetch(url, {
       ...baseConfig,
       ...instanceConfig,
-      fetchFn:
-        instanceConfig.fetchFn ??
-        baseConfig.fetchFn ??
-        globalThis.fetch.bind(globalThis),
       headers: {
         ...normalizeHeaders(baseConfig.headers),
         ...normalizeHeaders(instanceConfig.headers),
