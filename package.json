@@ -1,6 +1,6 @@
 {
   "name": "neat-fetch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Neat Fetch is a modern, lightweight, and type-safe wrapper around the native `fetch` API that makes HTTP requests predictable, readable, and enjoyable.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -42,7 +42,12 @@ interface NeatFetchInstance {
   baseURL(url: string): NeatFetchInstance;
   headers(requestHeaders: Record<string, string>): NeatFetchInstance;
   query(queryParams: Record<string, any>): NeatFetchInstance;
-  fromResponse(response: Response): Pick<NeatFetchInstance, 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'>
+  fromResponse(
+    response: Response
+  ): Pick<
+    NeatFetchInstance,
+    "json" | "text" | "blob" | "arrayBuffer" | "formData"
+  >;
 
   // Promise interface
   then<TResult1 = FetchResult<Response>, TResult2 = never>(
@@ -75,7 +80,10 @@ function normalizeHeaders(
   return Object.fromEntries(entries.map(([k, v]) => [k.toLowerCase(), v]));
 }
 
-async function tupleParseResponse<T = any>(response: Response, method: keyof Response): Promise<FetchResult<T>> {
+async function tupleParseResponse<T = any>(
+  response: Response,
+  method: keyof Response
+): Promise<FetchResult<T>> {
   try {
     const data = await (response[method] as () => Promise<any>)();
     return [data, null];
@@ -98,7 +106,7 @@ class NeatFetch implements NeatFetchInstance {
   private readonly fetchFn: typeof fetch;
 
   constructor(url: string, options: FetchOptions = {}) {
-    this.fetchFn = options.fetchFn ?? globalThis.fetch;
+    this.fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
     this.url = url;
     this.fetchOptions = { ...options };
     this.headersObj = normalizeHeaders(this.fetchOptions.headers);
@@ -519,13 +527,19 @@ class NeatFetch implements NeatFetchInstance {
     });
   }
 
-  fromResponse(response: Response): Pick<NeatFetchInstance, 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'> {
+  fromResponse(
+    response: Response
+  ): Pick<
+    NeatFetchInstance,
+    "json" | "text" | "blob" | "arrayBuffer" | "formData"
+  > {
     return {
-      json: <T = any>() => tupleParseResponse<T>(response, 'json'),
-      text: () => tupleParseResponse<string>(response, 'text'),
-      blob: () => tupleParseResponse<Blob>(response, 'blob'),
-      arrayBuffer: () => tupleParseResponse<ArrayBuffer>(response, 'arrayBuffer'),
-      formData: () => tupleParseResponse<FormData>(response, 'formData'),
+      json: <T = any>() => tupleParseResponse<T>(response, "json"),
+      text: () => tupleParseResponse<string>(response, "text"),
+      blob: () => tupleParseResponse<Blob>(response, "blob"),
+      arrayBuffer: () =>
+        tupleParseResponse<ArrayBuffer>(response, "arrayBuffer"),
+      formData: () => tupleParseResponse<FormData>(response, "formData"),
     };
   }
 }
@@ -543,6 +557,10 @@ function createNeatFetchInstance(
     return new NeatFetch(url, {
       ...baseConfig,
       ...instanceConfig,
+      fetchFn:
+        instanceConfig.fetchFn ??
+        baseConfig.fetchFn ??
+        globalThis.fetch.bind(globalThis),
       headers: {
         ...normalizeHeaders(baseConfig.headers),
         ...normalizeHeaders(instanceConfig.headers),
